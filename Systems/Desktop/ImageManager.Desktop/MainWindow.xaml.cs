@@ -3,6 +3,8 @@ using ImageManager.Desktop.Services;
 using Microsoft.Win32;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Net.Http;
+using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -132,8 +134,37 @@ public partial class MainWindow : Window
         }
     }
 
-    private void DeleteButton_Click(object sender, RoutedEventArgs e)
+    private async void DeleteButton_Click(object sender, RoutedEventArgs e)
     {
-        // Логика удаления
+        if (ImagesGrid.SelectedItem is not ImageViewModel selectedImage)
+        {
+            MessageBox.Show("Выберите изображение для удаления.",
+                           "Предупреждение",
+                           MessageBoxButton.OK,
+                           MessageBoxImage.Warning);
+            return;
+        }
+
+        var confirmation = MessageBox.Show("Удалить выбранное изображение?",
+                                          "Подтверждение",
+                                          MessageBoxButton.YesNo,
+                                          MessageBoxImage.Question);
+
+        if (confirmation != MessageBoxResult.Yes) return;
+
+        try
+        {
+            await _imageService.DeleteImageAsync(selectedImage.Id);
+
+            Images.Remove(selectedImage);
+        }
+        catch (HttpRequestException ex) when (ex.StatusCode == HttpStatusCode.NotFound)
+        {
+            MessageBox.Show("Изображение не найдено на сервере.");
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Ошибка удаления: {ex.Message}");
+        }
     }
 }

@@ -49,4 +49,10 @@ public class ImageService
             Data = Convert.FromBase64String(content.Data)
         };
     }
+
+    public async Task DeleteImageAsync(Guid id)
+    {
+        var response = await _httpClient.DeleteAsync($"{BaseUrl}/{id}");
+        response.EnsureSuccessStatusCode();
+    }
 }
