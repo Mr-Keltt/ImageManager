@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+  image_manager_postgresql:
+    image: postgres:latest
+    
+  image_manager_api:
+    image: ${DOCKER_REGISTRY-}image-manager-api
+    build:
+        context: .
+        dockerfile: Systems/API/ImageManager.API/Dockerfile
+    depends_on:
+      - image_manager_postgresql
+
+  # image_manager_desktop:
+  #   image: ${DOCKER_REGISTRY-}image-manager-desktop
+  #   build:
+  #     context: .
+  #     dockerfile: /Systems/Desktop/ImageManager.Desktop/Dockerfile
+  #   depends_on:
+  #     - image_manager_api
+  #     - image_manager_postgresql
