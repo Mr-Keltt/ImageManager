@@ -139,19 +139,14 @@
                                   MinWidth="150"
                                   CanUserResize="True"/>
 
-                <DataGridTemplateColumn Header="Изображение" 
-                                       Width="*"
-                                       MinWidth="200"
-                                       CanUserResize="True">
+                <DataGridTemplateColumn Header="Изображение" Width="*" MinWidth="200">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Grid Height="150" 
-                                  VerticalAlignment="Center"
-                                  HorizontalAlignment="Center">
-                                <Image Source="{Binding ImagePath}"
-                                       Stretch="Uniform"
-                                       MaxHeight="150"
-                                       MaxWidth="300"/>
+                            <Grid Height="150" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Image Source="{Binding ImageSource}"
+                       Stretch="Uniform"
+                       MaxHeight="150"
+                       MaxWidth="300"/>
                             </Grid>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

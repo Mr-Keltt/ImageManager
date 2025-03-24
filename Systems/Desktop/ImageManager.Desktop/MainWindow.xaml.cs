@@ -11,27 +11,34 @@ namespace ImageManager.Desktop;
 public partial class MainWindow : Window
 {
     private readonly ImageService _imageService = new();
-
-    public ObservableCollection<ImageItem> Images { get; set; } = new ObservableCollection<ImageItem>();
+    public ObservableCollection<ImageItem> Images { get; } = new();
 
     public MainWindow()
     {
         InitializeComponent();
-        
-        // Пример с абсолютными путями для теста
-        Images.Add(new ImageItem 
-        { 
-            Name = "Привет.png", 
-            ImagePath = @"C:\Users\dmitr\Desktop\Programming\ImageManager\Systems\Desktop\ImageManager.Desktop\bin\Debug\net8.0-windows\placeholder.png"
-        });
-        Images.Add(new ImageItem
-        {
-            Name = "Привет.png",
-            ImagePath = @"C:\Users\dmitr\Desktop\Programming\ImageManager\Systems\Desktop\ImageManager.Desktop\bin\Debug\net8.0-windows\placeholder.png"
-        });
-        
-
+        Loaded += MainWindow_Loaded;
         ImagesGrid.ItemsSource = Images;
+    }
+
+    private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
+    {
+        await LoadImagesFromApi();
+    }
+
+    private async Task LoadImagesFromApi()
+    {
+        try
+        {
+            var apiImages = await _imageService.GetAllImagesAsync();
+            foreach (var image in apiImages)
+            {
+                Images.Add(image); // ImageData уже содержит данные, ImageSource обновится автоматически
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Ошибка загрузки: {ex.Message}");
+        }
     }
 
     private async void AddButton_Click(object sender, RoutedEventArgs e)
@@ -50,25 +57,26 @@ public partial class MainWindow : Window
                 var fileName = Path.GetFileName(filePath);
                 var fileBytes = File.ReadAllBytes(filePath);
 
-                var dto = new ImageCreateDto
+                var newImage = await _imageService.UploadImageAsync(new ImageCreateDto
                 {
                     Name = fileName,
                     FileContent = fileBytes
-                };
+                });
 
-                var newImage = await _imageService.UploadImageAsync(dto);
-
-                Images.Add(new ImageItem
+                var imageItem = new ImageItem
                 {
                     Id = newImage.Id,
                     Name = newImage.Name,
+                    ImageData = fileBytes,
                     ImagePath = filePath
-                });
+                };
+
+                imageItem.UpdateImageSource();
+                Images.Add(imageItem);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка загрузки",
-                    MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Ошибка: {ex.Message}");
             }
         }
     }
