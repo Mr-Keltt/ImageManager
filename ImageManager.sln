@@ -7,8 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{FE1B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{F7F79848-99F4-4E13-8429-87229F87BB84}"
 	ProjectSection(SolutionItems) = preProject
-		.github\workflows\docker-compose.yml = .github\workflows\docker-compose.yml
 		.github\workflows\run-tests.yml = .github\workflows\run-tests.yml
+		.github\workflows\run-docker-compose.yml = .github\workflows\run-docker-compose.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".docker", ".docker", "{50BB92C5-B1E9-418C-A932-F6245773D206}"
@@ -57,7 +57,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Migrations", "Migrations", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageManager.Context.Migrations.PgSql", "Infrastructure\Data\Migrations\ImageManager.Context.Migrations.PgSql\ImageManager.Context.Migrations.PgSql.csproj", "{EEA9F035-2D0C-4DDC-BD2D-90005F605D65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageManager.Services.ImageManagement", "Application\Services\ImageManager.Services.ImageManagement\ImageManager.Services.ImageManagement.csproj", "{BE7E5CEB-D134-4B16-8EDE-394AC9BE7AC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageManager.Services.ImageManagement", "Application\Services\ImageManager.Services.ImageManagement\ImageManager.Services.ImageManagement.csproj", "{BE7E5CEB-D134-4B16-8EDE-394AC9BE7AC2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageManager.Desktop", "Systems\Desktop\ImageManager.Desktop\ImageManager.Desktop.csproj", "{1A60D7DF-27DF-4439-BC1A-010370039124}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,6 +103,10 @@ Global
 		{BE7E5CEB-D134-4B16-8EDE-394AC9BE7AC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE7E5CEB-D134-4B16-8EDE-394AC9BE7AC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE7E5CEB-D134-4B16-8EDE-394AC9BE7AC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A60D7DF-27DF-4439-BC1A-010370039124}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A60D7DF-27DF-4439-BC1A-010370039124}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A60D7DF-27DF-4439-BC1A-010370039124}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A60D7DF-27DF-4439-BC1A-010370039124}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -123,6 +129,7 @@ Global
 		{49F4E88E-FABB-47C9-982A-7557CBD22AB7} = {24D0BF53-0FD9-44BB-992C-324206D03F0E}
 		{EEA9F035-2D0C-4DDC-BD2D-90005F605D65} = {49F4E88E-FABB-47C9-982A-7557CBD22AB7}
 		{BE7E5CEB-D134-4B16-8EDE-394AC9BE7AC2} = {8209FDF8-7E48-48C5-A6F3-C3276D6E5ED6}
+		{1A60D7DF-27DF-4439-BC1A-010370039124} = {278991DF-4C5E-42C8-91C8-80F6A945A660}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4757B313-9F0D-4596-AA70-E6D3966DCD84}
