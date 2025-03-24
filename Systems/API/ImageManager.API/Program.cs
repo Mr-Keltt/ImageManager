@@ -1,6 +1,7 @@
 using ImageManager.API.Configuration;
 using ImageManager.API;
 using ImageManager.Services.Settings;
+using ImageManager.Context;
 
 var mainSettings = ImageManager.Common.Settings.Settings.Load<MainSettings>("Main");
 var logSettings = ImageManager.Common.Settings.Settings.Load<LogSettings>("Log");
@@ -16,7 +17,7 @@ services.AddAppController();
 
 services.AddHttpContextAccessor();
 
-//services.AddAppDbContext();
+services.AddAppDbContext();
 
 services.AddAppHealthChecks();
 
@@ -40,7 +41,7 @@ app.UseAppHealthChecks();
 
 app.UseAppSwagger();
 
-//DbInitializer.Execute(app.Services);
+DbInitializer.Execute(app.Services);
 
 //DbSeeder.Execute(app.Services);
 
