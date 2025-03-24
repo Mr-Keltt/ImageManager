@@ -73,7 +73,7 @@ public class ImageViewModel : INotifyPropertyChanged
                 _ => 0
             };
 
-            var transform = new RotateTransform(angle);
+            var transform = new RotateTransform(-angle);
             var transformedBitmap = new TransformedBitmap(image, transform);
             ImageSource = transformedBitmap;
         }

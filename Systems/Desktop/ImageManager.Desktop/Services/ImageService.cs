@@ -35,4 +35,18 @@ public class ImageService
             Data = Convert.FromBase64String(r.Data)
         }).ToList();
     }
+
+    public async Task<ImageBaseModel> UpdateImageAsync(Guid id, ImageCreateRequest request)
+    {
+        var response = await _httpClient.PutAsJsonAsync($"{BaseUrl}/{id}", request);
+        response.EnsureSuccessStatusCode();
+
+        var content = await response.Content.ReadFromJsonAsync<ImageResponse>();
+        return new ImageBaseModel
+        {
+            Id = content.Id,
+            Name = content.Name,
+            Data = Convert.FromBase64String(content.Data)
+        };
+    }
 }

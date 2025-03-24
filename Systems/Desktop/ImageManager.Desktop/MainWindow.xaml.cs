@@ -48,7 +48,7 @@ public partial class MainWindow : Window
         var openFileDialog = new OpenFileDialog
         {
             Filter = "Image files (*.png;*.jpg)|*.png;*.jpg",
-            Title = "Выберите изображение"
+            Title = "Добавить изображение"
         };
 
         if (openFileDialog.ShowDialog() == true)
@@ -83,20 +83,57 @@ public partial class MainWindow : Window
         }
     }
 
-    private void EditButton_Click(object sender, RoutedEventArgs e)
+    private async void EditButton_Click(object sender, RoutedEventArgs e)
     {
-        // Логика изменения
+        if (ImagesGrid.SelectedItem is not ImageViewModel selectedImage)
+        {
+            MessageBox.Show("Выберите изображение для изменения.", "Предупреждение",
+                MessageBoxButton.OK, MessageBoxImage.Warning);
+            return;
+        }
+
+        var openFileDialog = new OpenFileDialog
+        {
+            Filter = "Image files (*.png;*.jpg)|*.png;*.jpg",
+            Title = "Изменить изображение"
+        };
+
+        if (openFileDialog.ShowDialog() == true)
+        {
+            try
+            {
+                var filePath = openFileDialog.FileName;
+                var fileName = Path.GetFileName(filePath);
+                var fileBytes = File.ReadAllBytes(filePath);
+
+                var updatedImage = await _imageService.UpdateImageAsync(
+                    selectedImage.Id,
+                    new ImageCreateRequest
+                    {
+                        Name = fileName,
+                        FileContent = fileBytes
+                    });
+
+                selectedImage.UpdateFromBaseModel(new ImageBaseModel
+                {
+                    Id = updatedImage.Id,
+                    Name = updatedImage.Name,
+                    Data = updatedImage.Data,
+                    LocalPath = filePath
+                });
+
+                var index = Images.IndexOf(selectedImage);
+                Images[index] = selectedImage;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка: {ex.Message}");
+            }
+        }
     }
 
     private void DeleteButton_Click(object sender, RoutedEventArgs e)
     {
         // Логика удаления
-    }
-
-    private void ImagesGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        // Обработка выделения строки
-        var selectedItem = ImagesGrid.SelectedItem as ImageBaseModel;
-        // Ваша логика...
     }
 }
