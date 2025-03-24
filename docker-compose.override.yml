@@ -1,0 +1,39 @@
+version: '3.9'
+
+services:
+    
+  image_manager_postgresql:
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Passw0rd
+      - POSTGRES_DB=ImageManagerDB
+    ports:
+      - "45432:5432"
+    networks:
+      - shared_image_manager_net
+    volumes:      
+      - postgres-data:/var/lib/postgresql/data
+
+  image_manager_api:
+    ports:
+      - "10000:8080"
+    networks:
+      - shared_image_manager_net
+    env_file:
+      - env.api
+
+  # image_manager_desktop:
+  #   ports:
+  #     - "10100:80"
+  #   networks:
+  #     - shared_image_manager_net
+  #   env_file:
+  #     - env.desktop
+
+networks:
+  shared_image_manager_net:
+    name: image_manager
+    driver: bridge
+
+volumes:
+  postgres-data:
