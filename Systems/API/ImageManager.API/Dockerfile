@@ -10,6 +10,10 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Systems/API/ImageManager.API/ImageManager.API.csproj", "Systems/API/ImageManager.API/"]
+COPY ["Application/Models/ImageManager.Models/ImageManager.Models.csproj", "Application/Models/ImageManager.Models/"]
+COPY ["Application/Services/ImageManager.Services.Logger/ImageManager.Services.Logger.csproj", "Application/Services/ImageManager.Services.Logger/"]
+COPY ["Application/Services/ImageManager.Services.Settings/ImageManager.Services.Settings.csproj", "Application/Services/ImageManager.Services.Settings/"]
+COPY ["Shared/ImageManager.Common/ImageManager.Common.csproj", "Shared/ImageManager.Common/"]
 RUN dotnet restore "./Systems/API/ImageManager.API/ImageManager.API.csproj"
 COPY . .
 WORKDIR "/src/Systems/API/ImageManager.API"

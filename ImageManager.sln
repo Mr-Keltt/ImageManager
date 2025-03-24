@@ -16,6 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".docker", ".docker", "{50BB
 		.dockerignore = .dockerignore
 		docker-compose.override.yml = docker-compose.override.yml
 		docker-compose.yml = docker-compose.yml
+		env.api = env.api
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{FDEA6E4E-43DC-4A40-9A8B-B143383568AC}"
@@ -40,6 +41,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Desktop", "Desktop", "{2789
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageManager.API", "Systems\API\ImageManager.API\ImageManager.API.csproj", "{A949B593-F2D9-4F12-85FC-BA437661775A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageManager.Common", "Shared\ImageManager.Common\ImageManager.Common.csproj", "{2FBA6006-ED7E-481E-849F-0E0F0020148F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageManager.Services.Logger", "Application\Services\ImageManager.Services.Logger\ImageManager.Services.Logger.csproj", "{F5432427-B551-43F6-919D-ECA0DE5F8726}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageManager.Services.Settings", "Application\Services\ImageManager.Services.Settings\ImageManager.Services.Settings.csproj", "{ADC016D1-C398-454D-B7A6-32AFB9E83277}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageManager.Models", "Application\Models\ImageManager.Models\ImageManager.Models.csproj", "{691AA467-747E-49C8-B2BF-2D85142F5AEE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +59,22 @@ Global
 		{A949B593-F2D9-4F12-85FC-BA437661775A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A949B593-F2D9-4F12-85FC-BA437661775A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A949B593-F2D9-4F12-85FC-BA437661775A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FBA6006-ED7E-481E-849F-0E0F0020148F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FBA6006-ED7E-481E-849F-0E0F0020148F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FBA6006-ED7E-481E-849F-0E0F0020148F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FBA6006-ED7E-481E-849F-0E0F0020148F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5432427-B551-43F6-919D-ECA0DE5F8726}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5432427-B551-43F6-919D-ECA0DE5F8726}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5432427-B551-43F6-919D-ECA0DE5F8726}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5432427-B551-43F6-919D-ECA0DE5F8726}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADC016D1-C398-454D-B7A6-32AFB9E83277}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADC016D1-C398-454D-B7A6-32AFB9E83277}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADC016D1-C398-454D-B7A6-32AFB9E83277}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADC016D1-C398-454D-B7A6-32AFB9E83277}.Release|Any CPU.Build.0 = Release|Any CPU
+		{691AA467-747E-49C8-B2BF-2D85142F5AEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{691AA467-747E-49C8-B2BF-2D85142F5AEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{691AA467-747E-49C8-B2BF-2D85142F5AEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{691AA467-747E-49C8-B2BF-2D85142F5AEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,6 +88,10 @@ Global
 		{3576A0EA-30F7-412F-B1B1-DC407EBCDD38} = {4A3259E3-D151-486C-B824-CACFDD9B30B3}
 		{278991DF-4C5E-42C8-91C8-80F6A945A660} = {4A3259E3-D151-486C-B824-CACFDD9B30B3}
 		{A949B593-F2D9-4F12-85FC-BA437661775A} = {3576A0EA-30F7-412F-B1B1-DC407EBCDD38}
+		{2FBA6006-ED7E-481E-849F-0E0F0020148F} = {3E7D8DD4-A051-403D-B718-755EAE193DE8}
+		{F5432427-B551-43F6-919D-ECA0DE5F8726} = {8209FDF8-7E48-48C5-A6F3-C3276D6E5ED6}
+		{ADC016D1-C398-454D-B7A6-32AFB9E83277} = {8209FDF8-7E48-48C5-A6F3-C3276D6E5ED6}
+		{691AA467-747E-49C8-B2BF-2D85142F5AEE} = {5DBD6727-1E28-4FDD-B404-78707F3EA16C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4757B313-9F0D-4596-AA70-E6D3966DCD84}
