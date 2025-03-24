@@ -1,5 +1,8 @@
 ﻿using ImageManager.Desktop.Models;
+using ImageManager.Desktop.Services;
+using Microsoft.Win32;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -7,6 +10,8 @@ namespace ImageManager.Desktop;
 
 public partial class MainWindow : Window
 {
+    private readonly ImageService _imageService = new();
+
     public ObservableCollection<ImageItem> Images { get; set; } = new ObservableCollection<ImageItem>();
 
     public MainWindow()
@@ -29,9 +34,43 @@ public partial class MainWindow : Window
         ImagesGrid.ItemsSource = Images;
     }
 
-    private void AddButton_Click(object sender, RoutedEventArgs e)
+    private async void AddButton_Click(object sender, RoutedEventArgs e)
     {
-        // Логика добавления
+        var openFileDialog = new OpenFileDialog
+        {
+            Filter = "Image files (*.png;*.jpg)|*.png;*.jpg",
+            Title = "Выберите изображение"
+        };
+
+        if (openFileDialog.ShowDialog() == true)
+        {
+            try
+            {
+                var filePath = openFileDialog.FileName;
+                var fileName = Path.GetFileName(filePath);
+                var fileBytes = File.ReadAllBytes(filePath);
+
+                var dto = new ImageCreateDto
+                {
+                    Name = fileName,
+                    FileContent = fileBytes
+                };
+
+                var newImage = await _imageService.UploadImageAsync(dto);
+
+                Images.Add(new ImageItem
+                {
+                    Id = newImage.Id,
+                    Name = newImage.Name,
+                    ImagePath = filePath
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка загрузки",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 
     private void EditButton_Click(object sender, RoutedEventArgs e)
