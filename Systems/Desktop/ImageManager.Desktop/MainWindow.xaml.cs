@@ -11,7 +11,7 @@ namespace ImageManager.Desktop;
 public partial class MainWindow : Window
 {
     private readonly ImageService _imageService = new();
-    public ObservableCollection<ImageItem> Images { get; } = new();
+    public ObservableCollection<ImageViewModel> Images { get; } = new();
 
     public MainWindow()
     {
@@ -32,7 +32,9 @@ public partial class MainWindow : Window
             var apiImages = await _imageService.GetAllImagesAsync();
             foreach (var image in apiImages)
             {
-                Images.Add(image); // ImageData уже содержит данные, ImageSource обновится автоматически
+                var viewModel = new ImageViewModel();
+                viewModel.UpdateFromBaseModel(image);
+                Images.Add(viewModel);
             }
         }
         catch (Exception ex)
@@ -57,22 +59,22 @@ public partial class MainWindow : Window
                 var fileName = Path.GetFileName(filePath);
                 var fileBytes = File.ReadAllBytes(filePath);
 
-                var newImage = await _imageService.UploadImageAsync(new ImageCreateDto
+                var newImage = await _imageService.UploadImageAsync(new ImageCreateRequest
                 {
                     Name = fileName,
                     FileContent = fileBytes
                 });
 
-                var imageItem = new ImageItem
+                var viewModel = new ImageViewModel();
+                viewModel.UpdateFromBaseModel(new ImageBaseModel
                 {
                     Id = newImage.Id,
                     Name = newImage.Name,
-                    ImageData = fileBytes,
-                    ImagePath = filePath
-                };
+                    Data = newImage.Data,
+                    LocalPath = filePath
+                });
 
-                imageItem.UpdateImageSource();
-                Images.Add(imageItem);
+                Images.Add(viewModel);
             }
             catch (Exception ex)
             {
@@ -94,7 +96,7 @@ public partial class MainWindow : Window
     private void ImagesGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         // Обработка выделения строки
-        var selectedItem = ImagesGrid.SelectedItem as ImageItem;
+        var selectedItem = ImagesGrid.SelectedItem as ImageBaseModel;
         // Ваша логика...
     }
 }
