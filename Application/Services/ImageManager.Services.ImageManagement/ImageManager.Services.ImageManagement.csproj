@@ -7,12 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Infrastructure\Repositories\ImageManager.Entities\ImageManager.Entities.csproj" />
+    <ProjectReference Include="..\..\..\Infrastructure\Data\ImageManager.Context\ImageManager.Context.csproj" />
+    <ProjectReference Include="..\..\Models\ImageManager.Models\ImageManager.Models.csproj" />
+    <ProjectReference Include="..\ImageManager.Services.Logger\ImageManager.Services.Logger.csproj" />
   </ItemGroup>
 
 </Project>

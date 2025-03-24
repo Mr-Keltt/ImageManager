@@ -2,6 +2,7 @@
 using ImageManager.Services.Logger;
 using ImageManager.API.Configuration;
 using ImageManager.Application.Models;
+using ImageManager.Services.ImageManagement;
 
 namespace ImageManager.API;
 
@@ -25,7 +26,8 @@ public static class Bootstrapper
                 .AddLogSettings()
                 .AddAppLogger()
                 .AddAppAutoMappers()
-                .AddApplicationModels();
+                .AddApplicationModels()
+                .AddImageManagement();
 
         return service;
     }
