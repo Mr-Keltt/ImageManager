@@ -16,4 +16,10 @@
     <Page Include="App.xaml" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Styles\Buttons\" />
+    <Folder Include="Styles\DataGrid\" />
+    <Folder Include="Themes\" />
+  </ItemGroup>
+
 </Project>
