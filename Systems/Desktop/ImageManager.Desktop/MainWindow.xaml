@@ -46,7 +46,7 @@
             </Setter>
         </Style>
 
-        <!-- Обновленный стиль для DataGrid -->
+        <!-- Стиль для DataGrid -->
         <Style TargetType="DataGrid">
             <Setter Property="Background" Value="White"/>
             <Setter Property="BorderThickness" Value="1"/>
@@ -61,7 +61,7 @@
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
         </Style>
 
-        <!-- Стиль для ячеек таблицы -->
+        <!-- Стиль для ячеек -->
         <Style TargetType="DataGridCell">
             <Setter Property="BorderThickness" Value="0,0,0,1"/>
             <Setter Property="BorderBrush" Value="#E0E0E0"/>
@@ -69,12 +69,11 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="DataGridCell">
                         <Grid Background="Transparent">
-                            <!-- Фоновая панель для захвата кликов -->
                             <Border Background="Transparent" 
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"/>
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"/>
                             <ContentPresenter HorizontalAlignment="Center"
-                                          VerticalAlignment="Center"/>
+                                            VerticalAlignment="Center"/>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
@@ -86,10 +85,12 @@
             </Style.Triggers>
         </Style>
 
-        <!-- Стиль для строк таблицы -->
+        <!-- Стиль для строк -->
         <Style TargetType="DataGridRow">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Height" Value="160"/>
+            <!-- Фиксированная высота -->
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="#F0F0F0"/>
@@ -101,7 +102,7 @@
             </Style.Triggers>
         </Style>
 
-        <!-- Стиль для заголовков колонок -->
+        <!-- Стиль для заголовков -->
         <Style TargetType="DataGridColumnHeader">
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -120,14 +121,16 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- Таблица с изображениями -->
+        <!-- Исправленная таблица -->
         <DataGrid x:Name="ImagesGrid"
                 Grid.Row="0"
                 AutoGenerateColumns="False"
                 Margin="0"
                 ItemsSource="{Binding Images}"
                 CanUserResizeColumns="True"
-                SelectionChanged="ImagesGrid_SelectionChanged">
+                SelectionChanged="ImagesGrid_SelectionChanged"
+                RowHeight="160">
+            <!-- Фиксированная высота строки -->
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Наименование"
@@ -142,11 +145,14 @@
                                        CanUserResize="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding ImagePath}"
-                                   Stretch="Uniform"
-                                   MaxHeight="150"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"/>
+                            <Grid Height="150" 
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Center">
+                                <Image Source="{Binding ImagePath}"
+                                       Stretch="Uniform"
+                                       MaxHeight="150"
+                                       MaxWidth="300"/>
+                            </Grid>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
