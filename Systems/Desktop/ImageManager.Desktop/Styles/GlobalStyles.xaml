@@ -1,16 +1,47 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <!-- Базовые настройки приложения -->
+    <!--
+    =====================================================================
+    Global Application Style Definitions
+    =====================================================================
+    Base styling configuration for all application windows and shared resources
+    -->
+
+    <!-- 
+    =====================================================================
+    Window Base Style
+    =====================================================================
+    Applies to all Window elements in the application
+    -->
     <Style TargetType="Window">
+        <!-- Font configuration for consistent typography -->
         <Setter Property="FontFamily" Value="Segoe UI"/>
         <Setter Property="FontSize" Value="14"/>
+        
+        <!-- Background color for all windows -->
         <Setter Property="Background" Value="White"/>
     </Style>
 
-    <!-- Общие цвета -->
+    <!--
+    =====================================================================
+    Color Palette Definitions
+    =====================================================================
+    Centralized color scheme for consistent theming
+    -->
+    
+    <!-- Primary brand color for interactive elements -->
     <Color x:Key="PrimaryColor">#0078D4</Color>
+    
+    <!-- Hover state color for interactive elements -->
     <Color x:Key="HoverColor">#F0F0F0</Color>
 
-    <!-- Стандартные отступы -->
+    <!--
+    =====================================================================
+    Spacing and Layout Constants
+    =====================================================================
+    Standardized spacing values for consistent UI layout
+    -->
+    
+    <!-- Default padding value for containers and components -->
     <Thickness x:Key="StandardPadding">10</Thickness>
 </ResourceDictionary>

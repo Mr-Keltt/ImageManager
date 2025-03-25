@@ -1,6 +1,18 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- 
+    =====================================================================
+    Flat Button Style Definition
+    =====================================================================
+    Modern minimalistic button style with hover interaction
+    -->
     <Style x:Key="FlatButtonStyle" TargetType="Button">
+        <!-- 
+        ================================================================
+        Base Styling Properties
+        ================================================================
+        Defines the default visual state configuration
+        -->
         <Setter Property="Background" Value="#F8F8F8"/>
         <Setter Property="Foreground" Value="#333333"/>
         <Setter Property="BorderBrush" Value="#E0E0E0"/>
@@ -10,19 +22,51 @@
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="FontSize" Value="14"/>
+
+        <!-- 
+        ================================================================
+        Control Template
+        ================================================================
+        Custom template overriding default button visuals while
+        maintaining base functionality
+        -->
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
+                    <!-- 
+                    Main container with bindable background/border
+                    ================================================
+                    Uses TemplateBinding to connect with style properties
+                    -->
                     <Border x:Name="border"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
+                        <!-- 
+                        Content presentation
+                        =====================
+                        Centered content with inherited properties
+                        -->
                         <ContentPresenter HorizontalAlignment="Center"
                                         VerticalAlignment="Center"/>
                     </Border>
+
+                    <!-- 
+                    ====================================================
+                    Interaction Triggers
+                    ====================================================
+                    Visual feedback for user interactions
+                    -->
                     <ControlTemplate.Triggers>
+                        <!-- 
+                        Hover State Configuration
+                        ========================
+                        Changes background color and cursor on mouseover
+                        -->
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="border" Property="Background" Value="#F0F0F0"/>
+                            <Setter TargetName="border" 
+                                    Property="Background" 
+                                    Value="#F0F0F0"/>
                             <Setter Property="Cursor" Value="Hand"/>
                         </Trigger>
                     </ControlTemplate.Triggers>

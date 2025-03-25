@@ -1,22 +1,70 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- 
+    =====================================================================
+    DataGrid Cell Style Definition
+    =====================================================================
+    Custom styling for DataGrid cells with minimal borders and selection effects
+    -->
     <Style TargetType="DataGridCell">
+        <!-- 
+        ================================================================
+        Base Cell Styling
+        ================================================================
+        Configures border and background properties for normal state
+        -->
         <Setter Property="BorderThickness" Value="0,0,0,1"/>
         <Setter Property="BorderBrush" Value="#E0E0E0"/>
+        
+        <!-- 
+        ================================================================
+        Cell Template Configuration
+        ================================================================
+        Overrides default cell visuals while maintaining functionality
+        -->
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="DataGridCell">
+                    <!-- 
+                    Main container with layered elements:
+                    - Background layer for potential interactions
+                    - Content presentation layer
+                    -->
                     <Grid Background="Transparent">
+                        <!-- 
+                        Background container with stretch alignment
+                        ============================================
+                        Provides transparent hit-test surface
+                        -->
                         <Border Background="Transparent" 
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"/>
+                                
+                        <!-- 
+                        Content presentation
+                        =====================
+                        Centered content with inherited properties
+                        -->
                         <ContentPresenter HorizontalAlignment="Center"
                                         VerticalAlignment="Center"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+
+        <!-- 
+        ================================================================
+        Interaction Triggers
+        ================================================================
+        Visual states for cell selection
+        -->
         <Style.Triggers>
+            <!-- 
+            Selected State Configuration
+            ============================
+            Changes text color for better contrast with selection background
+            (Assumes selection background is set in parent DataGrid style)
+            -->
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Foreground" Value="White"/>
             </Trigger>

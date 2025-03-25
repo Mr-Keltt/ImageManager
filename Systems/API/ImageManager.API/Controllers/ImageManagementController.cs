@@ -8,12 +8,21 @@ using Microsoft.AspNetCore.Mvc;
 [ApiController]
 [Route("api/[controller]")]
 [Produces("application/json")]
+/// <summary>
+/// Provides API endpoints for managing image resources including CRUD operations.
+/// </summary>
 public class ImagesController : ControllerBase
 {
     private readonly IImageManagement _imageService;
     private readonly IMapper _mapper;
     private readonly IAppLogger _logger;
 
+    /// <summary>
+    /// Initializes a new instance of the ImagesController with required services.
+    /// </summary>
+    /// <param name="imageService">Image management service implementation.</param>
+    /// <param name="mapper">AutoMapper instance for object conversion.</param>
+    /// <param name="logger">Application logger for operation tracking.</param>
     public ImagesController(
         IImageManagement imageService,
         IMapper mapper,
@@ -25,8 +34,11 @@ public class ImagesController : ControllerBase
     }
 
     /// <summary>
-    /// Get all images
+    /// Retrieves all stored images from the system.
     /// </summary>
+    /// <returns>A collection of image responses representing all available images.</returns>
+    /// <response code="200">Successfully retrieved list of images</response>
+    /// <response code="500">Internal server error occurred</response>
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<ImageResponse>), 200)]
     public async Task<IActionResult> GetAll()
@@ -44,8 +56,13 @@ public class ImagesController : ControllerBase
     }
 
     /// <summary>
-    /// Create new image
+    /// Creates a new image entry in the system.
     /// </summary>
+    /// <param name="request">Image creation request containing image data.</param>
+    /// <returns>Newly created image resource with generated identifiers.</returns>
+    /// <response code="201">Successfully created new image</response>
+    /// <response code="400">Invalid request format or data</response>
+    /// <response code="500">Image creation process failed</response>
     [HttpPost]
     [ProducesResponseType(typeof(ImageResponse), 201)]
     [ProducesResponseType(400)]
@@ -61,8 +78,6 @@ public class ImagesController : ControllerBase
         {
             var createModel = _mapper.Map<ImageCreateModel>(request);
             var result = await _imageService.CreateImageAsync(createModel);
-
-            // Возвращаем созданный объект напрямую
             return StatusCode(StatusCodes.Status201Created, _mapper.Map<ImageResponse>(result));
         }
         catch (Exception ex)
@@ -73,8 +88,15 @@ public class ImagesController : ControllerBase
     }
 
     /// <summary>
-    /// Update existing image
+    /// Updates an existing image resource with new data.
     /// </summary>
+    /// <param name="id">Unique identifier of the image to update.</param>
+    /// <param name="request">Image update request containing new data.</param>
+    /// <returns>Updated image resource with modified values.</returns>
+    /// <response code="200">Successfully updated image</response>
+    /// <response code="400">Invalid request format or data</response>
+    /// <response code="404">Specified image ID not found</response>
+    /// <response code="500">Image update process failed</response>
     [HttpPut("{id}")]
     [ProducesResponseType(typeof(ImageResponse), 200)]
     [ProducesResponseType(400)]
@@ -106,8 +128,13 @@ public class ImagesController : ControllerBase
     }
 
     /// <summary>
-    /// Delete image by ID
+    /// Deletes a specific image resource from the system.
     /// </summary>
+    /// <param name="id">Unique identifier of the image to remove.</param>
+    /// <returns>Empty response for successful deletion or not found status.</returns>
+    /// <response code="204">Image successfully deleted</response>
+    /// <response code="404">Specified image ID not found</response>
+    /// <response code="500">Image deletion process failed</response>
     [HttpDelete("{id}")]
     [ProducesResponseType(204)]
     [ProducesResponseType(404)]
