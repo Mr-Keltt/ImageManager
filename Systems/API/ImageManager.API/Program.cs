@@ -43,6 +43,4 @@ app.UseAppSwagger();
 
 DbInitializer.Execute(app.Services);
 
-//DbSeeder.Execute(app.Services);
-
 app.Run();

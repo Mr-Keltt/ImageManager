@@ -7,6 +7,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ImageManager.Services.ImageManagement;
 
+/// <summary>
+/// Provides implementation for image management operations including CRUD functionality.
+/// </summary>
 public class ImageManagement : IImageManagement
 {
     private readonly IDbContextFactory<MainDbContext> _dbContextFactory;
@@ -14,6 +17,12 @@ public class ImageManagement : IImageManagement
     private readonly IAppLogger _logger;
     private readonly object _logModule = typeof(ImageManagement);
 
+    /// <summary>
+    /// Initializes a new instance of the ImageManagement service with required dependencies.
+    /// </summary>
+    /// <param name="dbContextFactory">Factory for creating database contexts.</param>
+    /// <param name="mapper">AutoMapper instance for object mapping.</param>
+    /// <param name="logger">Application logger for tracking operations.</param>
     public ImageManagement(
         IDbContextFactory<MainDbContext> dbContextFactory,
         IMapper mapper,
@@ -24,6 +33,11 @@ public class ImageManagement : IImageManagement
         _logger = logger;
     }
 
+    /// <summary>
+    /// Retrieves all image entries from the database.
+    /// </summary>
+    /// <returns>A collection of image models representing all stored images.</returns>
+    /// <exception cref="ApplicationException">Thrown when database operation fails.</exception>
     public async Task<IEnumerable<ImageModel>> GetAllImagesAsync()
     {
         using var context = await _dbContextFactory.CreateDbContextAsync();
@@ -44,6 +58,13 @@ public class ImageManagement : IImageManagement
         }
     }
 
+    /// <summary>
+    /// Creates a new image entry in the database.
+    /// </summary>
+    /// <param name="createModel">Data transfer object containing image details.</param>
+    /// <returns>The newly created image model with generated identifiers.</returns>
+    /// <exception cref="ArgumentNullException">Thrown when createModel is null.</exception>
+    /// <exception cref="ApplicationException">Thrown when creation operation fails.</exception>
     public async Task<ImageModel> CreateImageAsync(ImageCreateModel createModel)
     {
         if (createModel == null)
@@ -72,6 +93,15 @@ public class ImageManagement : IImageManagement
         }
     }
 
+    /// <summary>
+    /// Updates an existing image entry in the database.
+    /// </summary>
+    /// <param name="id">Unique identifier of the image to update.</param>
+    /// <param name="updateModel">Data transfer object containing updated image details.</param>
+    /// <returns>The updated image model reflecting changes.</returns>
+    /// <exception cref="ArgumentNullException">Thrown when updateModel is null.</exception>
+    /// <exception cref="KeyNotFoundException">Thrown when specified image ID is not found.</exception>
+    /// <exception cref="ApplicationException">Thrown when update operation fails.</exception>
     public async Task<ImageModel> UpdateImageAsync(Guid id, ImageUpdateModel updateModel)
     {
         if (updateModel == null)
@@ -106,6 +136,12 @@ public class ImageManagement : IImageManagement
         }
     }
 
+    /// <summary>
+    /// Deletes an image entry from the database.
+    /// </summary>
+    /// <param name="id">Unique identifier of the image to delete.</param>
+    /// <returns>True if deletion succeeded, false if image was not found.</returns>
+    /// <exception cref="ApplicationException">Thrown when deletion operation fails.</exception>
     public async Task<bool> DeleteImageAsync(Guid id)
     {
         using var context = await _dbContextFactory.CreateDbContextAsync();

@@ -9,32 +9,60 @@
         Width="500"
         ResizeMode="NoResize"
         WindowStyle="SingleBorderWindow">
+    <!--
+    =====================================================================
+    Main application window configuration
+    =====================================================================
+    -->
 
     <Grid>
+        <!-- 
+        =================================================================
+        Grid layout definition with two rows:
+        - Main content area (auto-sized)
+        - Control panel (fixed height)
+        =================================================================
+        -->
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- Таблица изображений -->
+        <!-- 
+        =================================================================
+        Images display DataGrid configuration
+        =================================================================
+        -->
         <DataGrid x:Name="ImagesGrid"
                   Grid.Row="0"
                   AutoGenerateColumns="False"
                   Margin="{StaticResource StandardPadding}"
                   ItemsSource="{Binding Images}"
                   RowHeight="160">
-
+            <!--
+            =============================================================
+            DataGrid columns configuration:
+            - Name column (text binding)
+            - Image preview column (template with image control)
+            =============================================================
+            -->
             <DataGrid.Columns>
+                <!-- Text column for image name display -->
                 <DataGridTextColumn Header="Наименование"
                                   Width="*"
                                   Binding="{Binding Name}"
                                   MinWidth="150"/>
 
+                <!-- Template column for image preview -->
                 <DataGridTemplateColumn Header="Изображение" 
                                      Width="*"
                                      MinWidth="200">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
+                            <!-- 
+                            Image container with fixed height and 
+                            aspect-ratio preserving stretch mode 
+                            -->
                             <Grid Height="150">
                                 <Image Source="{Binding ImageSource}"
                                        Stretch="Uniform"
@@ -46,11 +74,23 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <!-- Панель управления -->
+        <!-- 
+        =================================================================
+        Control panel with action buttons
+        =================================================================
+        -->
         <UniformGrid Grid.Row="1"
                      Columns="3"
                      Background="White"
                      Margin="{StaticResource StandardPadding}">
+            <!-- 
+            =============================================================
+            CRUD operation buttons with flat style:
+            - Add new image
+            - Edit existing image
+            - Delete selected image
+            =============================================================
+            -->
             <Button Content="Добавить" 
                     Style="{StaticResource FlatButtonStyle}"
                     Click="AddButton_Click"/>

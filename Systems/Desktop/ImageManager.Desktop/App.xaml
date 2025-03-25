@@ -5,16 +5,40 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <!-- Глобальные настройки -->
+                <!-- 
+                =====================================================================
+                Global application styling and theme definitions
+                =====================================================================
+                -->
+
+                <!-- Base application-wide styling definitions -->
                 <ResourceDictionary Source="Styles/GlobalStyles.xaml"/>
+
+                <!-- Theme configuration and color palettes -->
                 <ResourceDictionary Source="Themes/Generic.xaml"/>
 
-                <!-- Компоненты -->
+                <!-- 
+                =====================================================================
+                Reusable component templates and styles
+                =====================================================================
+                -->
+
+                <!-- Custom button styling definitions -->
                 <ResourceDictionary Source="Styles/Buttons/FlatButtonStyle.xaml"/>
 
-                <!-- DataGrid -->
+                <!-- 
+                =====================================================================
+                DataGrid component styling and templates
+                =====================================================================
+                -->
+
+                <!-- Base DataGrid container styling -->
                 <ResourceDictionary Source="Styles/DataGrid/DataGridStyles.xaml"/>
+
+                <!-- Individual cell styling rules -->
                 <ResourceDictionary Source="Styles/DataGrid/DataGridCellStyle.xaml"/>
+
+                <!-- Column header styling configuration -->
                 <ResourceDictionary Source="Styles/DataGrid/DataGridHeaderStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
