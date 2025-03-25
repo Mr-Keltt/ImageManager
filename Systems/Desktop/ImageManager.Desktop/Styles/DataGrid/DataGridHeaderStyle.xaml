@@ -1,0 +1,40 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- 
+    =====================================================================
+    DataGrid Column Header Style Definition
+    =====================================================================
+    Modern header styling with clean borders and typographic emphasis
+    -->
+    <Style TargetType="DataGridColumnHeader">
+        <!-- 
+        ================================================================
+        Base Header Styling
+        ================================================================
+        Configures alignment, colors, and spacing for column headers
+        -->
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Foreground" Value="#333333"/>
+        
+        <!-- 
+        ================================================================
+        Border Configuration
+        ================================================================
+        Bottom border for visual separation from data rows
+        -->
+        <Setter Property="BorderThickness" Value="0,0,0,2"/>
+        <Setter Property="BorderBrush" Value="#E0E0E0"/>
+        
+        <!-- 
+        ================================================================
+        Spacing and Typography
+        ================================================================
+        Ensures consistent padding and text presentation
+        -->
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+</ResourceDictionary>

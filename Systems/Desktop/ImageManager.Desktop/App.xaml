@@ -1,0 +1,46 @@
+﻿<Application x:Class="ImageManager.Desktop.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- 
+                =====================================================================
+                Global application styling and theme definitions
+                =====================================================================
+                -->
+
+                <!-- Base application-wide styling definitions -->
+                <ResourceDictionary Source="Styles/GlobalStyles.xaml"/>
+
+                <!-- Theme configuration and color palettes -->
+                <ResourceDictionary Source="Themes/Generic.xaml"/>
+
+                <!-- 
+                =====================================================================
+                Reusable component templates and styles
+                =====================================================================
+                -->
+
+                <!-- Custom button styling definitions -->
+                <ResourceDictionary Source="Styles/Buttons/FlatButtonStyle.xaml"/>
+
+                <!-- 
+                =====================================================================
+                DataGrid component styling and templates
+                =====================================================================
+                -->
+
+                <!-- Base DataGrid container styling -->
+                <ResourceDictionary Source="Styles/DataGrid/DataGridStyles.xaml"/>
+
+                <!-- Individual cell styling rules -->
+                <ResourceDictionary Source="Styles/DataGrid/DataGridCellStyle.xaml"/>
+
+                <!-- Column header styling configuration -->
+                <ResourceDictionary Source="Styles/DataGrid/DataGridHeaderStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

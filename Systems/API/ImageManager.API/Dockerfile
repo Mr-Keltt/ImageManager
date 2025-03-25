@@ -11,9 +11,13 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Systems/API/ImageManager.API/ImageManager.API.csproj", "Systems/API/ImageManager.API/"]
 COPY ["Application/Models/ImageManager.Models/ImageManager.Models.csproj", "Application/Models/ImageManager.Models/"]
+COPY ["Infrastructure/Repositories/ImageManager.Entities/ImageManager.Entities.csproj", "Infrastructure/Repositories/ImageManager.Entities/"]
+COPY ["Application/Services/ImageManager.Services.ImageManagement/ImageManager.Services.ImageManagement.csproj", "Application/Services/ImageManager.Services.ImageManagement/"]
+COPY ["Infrastructure/Data/ImageManager.Context/ImageManager.Context.csproj", "Infrastructure/Data/ImageManager.Context/"]
+COPY ["Shared/ImageManager.Common/ImageManager.Common.csproj", "Shared/ImageManager.Common/"]
 COPY ["Application/Services/ImageManager.Services.Logger/ImageManager.Services.Logger.csproj", "Application/Services/ImageManager.Services.Logger/"]
 COPY ["Application/Services/ImageManager.Services.Settings/ImageManager.Services.Settings.csproj", "Application/Services/ImageManager.Services.Settings/"]
-COPY ["Shared/ImageManager.Common/ImageManager.Common.csproj", "Shared/ImageManager.Common/"]
+COPY ["Infrastructure/Data/Migrations/ImageManager.Context.Migrations.PgSql/ImageManager.Context.Migrations.PgSql.csproj", "Infrastructure/Data/Migrations/ImageManager.Context.Migrations.PgSql/"]
 RUN dotnet restore "./Systems/API/ImageManager.API/ImageManager.API.csproj"
 COPY . .
 WORKDIR "/src/Systems/API/ImageManager.API"

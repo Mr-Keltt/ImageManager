@@ -26,13 +26,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\..\Application\Models\ImageManager.Models\ImageManager.Models.csproj" />
+    <ProjectReference Include="..\..\..\Application\Services\ImageManager.Services.ImageManagement\ImageManager.Services.ImageManagement.csproj" />
     <ProjectReference Include="..\..\..\Application\Services\ImageManager.Services.Logger\ImageManager.Services.Logger.csproj" />
     <ProjectReference Include="..\..\..\Application\Services\ImageManager.Services.Settings\ImageManager.Services.Settings.csproj" />
+    <ProjectReference Include="..\..\..\Infrastructure\Data\ImageManager.Context\ImageManager.Context.csproj" />
+    <ProjectReference Include="..\..\..\Infrastructure\Data\Migrations\ImageManager.Context.Migrations.PgSql\ImageManager.Context.Migrations.PgSql.csproj" />
     <ProjectReference Include="..\..\..\Shared\ImageManager.Common\ImageManager.Common.csproj" />
   </ItemGroup>
 
